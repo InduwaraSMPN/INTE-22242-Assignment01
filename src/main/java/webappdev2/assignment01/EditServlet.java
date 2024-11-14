@@ -24,7 +24,7 @@ public class EditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         try {
-            
+            // Get the path to the resources directory
             String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
             File inputFile = new File(resourcesPath);
 
@@ -66,7 +66,7 @@ public class EditServlet extends HttpServlet {
         String region = request.getParameter("region").trim();
         String gender = request.getParameter("gender").trim();
 
-        
+        // Validate all fields are filled
         if (firstName.isEmpty() || lastName.isEmpty() || employeeId.isEmpty()
                 || department.isEmpty() || email.isEmpty() || phone.isEmpty()
                 || address.isEmpty() || city.isEmpty() || region.isEmpty()
@@ -76,7 +76,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
-        
+        // Validate name format
         String namePattern = "^[A-Za-zÀ-ÖØ-öø-ÿ'\\-\\s]+$";
         if (!firstName.matches(namePattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -89,7 +89,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
-        
+        // Validate email format
         String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         if (!email.matches(emailPattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -97,7 +97,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
-        
+        // Validate phone number format
         String phonePattern = "^\\+?[0-9]{1,3}[-.\s]?(\\([0-9]{1,4}\\)|[0-9]{1,4})[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}$";
         if (!phone.matches(phonePattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -107,7 +107,7 @@ public class EditServlet extends HttpServlet {
 
         synchronized (this) {
             try {
-                
+                // Get the path to the resources directory
                 String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
                 File inputFile = new File(resourcesPath);
 
@@ -121,6 +121,7 @@ public class EditServlet extends HttpServlet {
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                         Element eElement = (Element) nNode;
                         if (eElement.getAttribute("id").equals(id)) {
+                            // Update the employee details
                             eElement.getElementsByTagName("firstName").item(0).setTextContent(firstName);
                             eElement.getElementsByTagName("lastName").item(0).setTextContent(lastName);
                             eElement.getElementsByTagName("employeeId").item(0).setTextContent(employeeId);
@@ -133,6 +134,7 @@ public class EditServlet extends HttpServlet {
                             eElement.getElementsByTagName("region").item(0).setTextContent(region);
                             eElement.getElementsByTagName("gender").item(0).setTextContent(gender);
 
+                            // Write the updated document back to the file
                             TransformerFactory transformerFactory = TransformerFactory.newInstance();
                             Transformer transformer = transformerFactory.newTransformer();
                             DOMSource source = new DOMSource(doc);

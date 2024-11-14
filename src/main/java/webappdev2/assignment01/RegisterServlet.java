@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
 
-        
+        // Retrieve form data
         String firstName = request.getParameter("firstName").trim();
         String lastName = request.getParameter("lastName").trim();
         String employeeId = request.getParameter("employeeId").trim();
@@ -36,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
         String region = request.getParameter("region").trim();
         String gender = request.getParameter("gender").trim();
 
-        
+        // Validate all fields are filled
         if (firstName.isEmpty() || lastName.isEmpty() || employeeId.isEmpty()
                 || department.isEmpty() || email.isEmpty() || phone.isEmpty()
                 || address.isEmpty() || city.isEmpty() || region.isEmpty()
@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        
+        // Validate name format
         String namePattern = "^[A-Za-zÀ-ÖØ-öø-ÿ'\\-\\s]+$";
         if (!firstName.matches(namePattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        
+        // Validate email format
         String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         if (!email.matches(emailPattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -67,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        
+        // Validate phone number format
         String phonePattern = "^\\+?[0-9]{1,3}[-.\s]?(\\([0-9]{1,4}\\)|[0-9]{1,4})[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}$";
         if (!phone.matches(phonePattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -75,10 +75,10 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        
+        // Synchronized block to ensure thread safety
         synchronized (this) {
             try {
-                
+                // Get the path to the resources directory
                 String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
                 File inputFile = new File(resourcesPath);
 
@@ -86,11 +86,11 @@ public class RegisterServlet extends HttpServlet {
                 DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
                 Document doc = docBuilder.parse(inputFile);
 
-                
+                // Create a new employee element
                 Element employee = doc.createElement("employee");
-                employee.setAttribute("id", UUID.randomUUID().toString()); 
+                employee.setAttribute("id", UUID.randomUUID().toString()); // Generate a unique ID
 
-                
+                // Add child elements to the employee element
                 addChildElement(doc, employee, "firstName", firstName);
                 addChildElement(doc, employee, "lastName", lastName);
                 addChildElement(doc, employee, "employeeId", employeeId);
@@ -103,10 +103,10 @@ public class RegisterServlet extends HttpServlet {
                 addChildElement(doc, employee, "region", region);
                 addChildElement(doc, employee, "gender", gender);
 
-                
+                // Append the new employee element to the document
                 doc.getDocumentElement().appendChild(employee);
 
-                
+                // Write the updated document back to the file
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(doc);
@@ -123,6 +123,7 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
+    // Helper method to add child elements to the parent element
     private void addChildElement(Document doc, Element parent, String name, String value) {
         Element elem = doc.createElement(name);
         elem.setTextContent(value);

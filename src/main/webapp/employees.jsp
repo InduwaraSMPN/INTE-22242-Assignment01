@@ -5,28 +5,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Employees</title>
+  <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <link href="styles.css" rel="stylesheet">
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-  
+
+  <!-- Unicons CSS -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 <body class="employees-body">
 <div class="common-container-styles employees_container">
   <h1 class="form-title">Employees</h1>
 
-  
+  <!-- Search Container -->
   <div class="search-container">
     <div class="input-box">
       <i class="uil uil-search"></i>
       <input type="text" id="searchInput" placeholder="Search here..." />
-      <button class="button" id="searchButton">Search</button>
+      <button class="button button-86 registration" id="searchButton">Search</button>
     </div>
   </div>
 
-  
+  <!-- Sort Container -->
   <div class="sort-container">
     <label for="sortSelect">Sort by:</label>
     <select id="sortSelect" class="form-select">
@@ -40,9 +46,10 @@
       <option value="region">Region</option>
       <option value="gender">Gender</option>
     </select>
-    <button class="btn btn-secondary" id="sortButton">Sort</button>
+    <button class="btn btn-secondary button-86" id="sortButton">Sort</button>
   </div>
 
+  <!-- Employees Table -->
   <table class="table table-bordered" id="employeesTable">
     <thead>
     <tr>
@@ -88,6 +95,7 @@
       <td><%= eElement.getElementsByTagName("region").item(0).getTextContent() %></td>
       <td><%= eElement.getElementsByTagName("gender").item(0).getTextContent() %></td>
       <td>
+        <!-- Edit and Delete buttons -->
         <a href="EditServlet?id=<%= eElement.getAttribute("id") %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
         <a href="DeleteServlet?id=<%= eElement.getAttribute("id") %>" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
       </td>
@@ -101,21 +109,25 @@
     %>
     </tbody>
   </table>
+  <!-- Link to add a new employee -->
   <a href="register.jsp" class="button-86 add-new">Add New Employee</a>
 </div>
 
 <script>
   $(document).ready(function() {
+    // Handle search button click
     $('#searchButton').on('click', function() {
       var searchQuery = $('#searchInput').val().toLowerCase();
       filterTable(searchQuery);
     });
 
+    // Handle sort button click
     $('#sortButton').on('click', function() {
       var sortBy = $('#sortSelect').val();
       sortTable(sortBy);
     });
 
+    // Function to filter the table based on search query
     function filterTable(query) {
       $('#employeesTable tbody tr').each(function() {
         var row = $(this);
@@ -128,6 +140,7 @@
       });
     }
 
+    // Function to sort the table based on selected column
     function sortTable(sortBy) {
       var rows = $('#employeesTable tbody tr').get();
       rows.sort(function(a, b) {
@@ -148,6 +161,7 @@
       });
     }
 
+    // Function to get the index of the column based on its header text
     function getIndex(sortBy) {
       var headers = $('#employeesTable th');
       for (var i = 0; i < headers.length; i++) {

@@ -24,7 +24,7 @@ public class DeleteServlet extends HttpServlet {
         String id = request.getParameter("id");
         synchronized (this) {
             try {
-                
+                // Get the path to the resources directory
                 String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
                 File inputFile = new File(resourcesPath);
 
@@ -38,8 +38,10 @@ public class DeleteServlet extends HttpServlet {
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                         Element eElement = (Element) nNode;
                         if (eElement.getAttribute("id").equals(id)) {
+                            // Remove the employee node
                             nNode.getParentNode().removeChild(nNode);
 
+                            // Write the updated document back to the file
                             TransformerFactory transformerFactory = TransformerFactory.newInstance();
                             Transformer transformer = transformerFactory.newTransformer();
                             DOMSource source = new DOMSource(doc);

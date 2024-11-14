@@ -4,16 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Employee Registration</title>
+  <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <link href="styles.css" rel="stylesheet">
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </head>
 <body class="common-body-styles">
 <div class="common-container-styles container">
   <h1 class="form-title">Employee Registration</h1>
 
-  
+  <!-- Error Modal -->
   <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -30,7 +34,7 @@
     </div>
   </div>
 
-  
+  <!-- Success Modal -->
   <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -49,6 +53,7 @@
     </div>
   </div>
 
+  <!-- Registration Form -->
   <form action="RegisterServlet" method="post" id="registrationForm">
     <div class="row">
       <div class="col-md-6">
@@ -152,6 +157,7 @@
 
 <script>
   $(document).ready(function() {
+    // Handle form submission
     $('#registrationForm').submit(function(event) {
       event.preventDefault();
       $.ajax({
@@ -179,6 +185,7 @@
       });
     });
 
+    // Redirect to employees page when "View Employees" button is clicked
     $('#viewEmployeesBtn').click(function() {
       window.open('employees.jsp', '_blank');
     });

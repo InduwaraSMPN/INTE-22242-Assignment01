@@ -5,9 +5,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit Employee</title>
+  <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <link href="styles.css" rel="stylesheet">
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </head>
 <body class="common-body-styles">
@@ -17,7 +21,7 @@
     Element employee = (Element) request.getAttribute("employee");
   %>
 
-  
+  <!-- Error Modal -->
   <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -34,7 +38,7 @@
     </div>
   </div>
 
-  
+  <!-- Success Modal -->
   <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -53,6 +57,7 @@
     </div>
   </div>
 
+  <!-- Edit Form -->
   <form action="EditServlet" method="post" id="editForm">
     <input type="hidden" name="id" value="<%= employee.getAttribute("id") %>">
 
@@ -169,6 +174,7 @@
 
 <script>
   $(document).ready(function() {
+    // Handle form submission
     $('#editForm').submit(function(event) {
       event.preventDefault();
       $.ajax({
@@ -200,6 +206,7 @@
       });
     });
 
+    // Redirect to employees page when "View Employees" button is clicked
     $('#viewEmployeesBtn').click(function() {
       window.open('employees.jsp', '_blank');
     });
