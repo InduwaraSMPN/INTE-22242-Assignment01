@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Induwara
-  Date: 11/14/2024
-  Time: 2:15 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="javax.xml.parsers.DocumentBuilderFactory, javax.xml.parsers.DocumentBuilder, org.w3c.dom.Document, org.w3c.dom.NodeList, org.w3c.dom.Node, org.w3c.dom.Element, java.io.File" %>
 <!DOCTYPE html>
@@ -15,11 +8,24 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </head>
 <body class="employees-body">
 <div class="common-container-styles employees_container">
   <h1 class="form-title">Employees</h1>
-  <table class="table table-bordered">
+
+  <!-- Search Form -->
+  <form class="form-inline mb-3" id="searchForm">
+    <div class="input-group">
+      <input type="text" class="form-control" id="searchInput" placeholder="Search by name, department, etc.">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered" id="employeesTable">
     <thead>
     <tr>
       <th>First Name</th>
@@ -79,5 +85,27 @@
   </table>
   <a href="register.jsp" class="button-86 add-new">Add New Employee</a>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#searchForm').on('submit', function(event) {
+      event.preventDefault();
+      var searchQuery = $('#searchInput').val().toLowerCase();
+      filterTable(searchQuery);
+    });
+
+    function filterTable(query) {
+      $('#employeesTable tbody tr').each(function() {
+        var row = $(this);
+        var rowData = row.text().toLowerCase();
+        if (rowData.indexOf(query) === -1) {
+          row.hide();
+        } else {
+          row.show();
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
