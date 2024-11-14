@@ -1,6 +1,6 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +8,7 @@
     font-family: "Poppins", sans-serif;
 }
 
+/* Common body styles */
 .common-body-styles {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
@@ -17,12 +18,14 @@
     padding: 20px;
 }
 
+/* Employees body styles */
 .employees-body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
     padding: 20px;
 }
 
+/* Common container styles */
 .common-container-styles {
     background: white;
     border-radius: 15px;
@@ -31,6 +34,7 @@
     margin: auto;
 }
 
+/* Button container styles */
 .btn-container {
     display: flex;
     gap: 20px;
@@ -38,10 +42,12 @@
     flex-wrap: wrap;
 }
 
+/* Container styles */
 .container {
     max-width: 800px;
 }
 
+/* Employees container styles */
 .employees_container {
     max-width: 90%;
     overflow-x: auto;
@@ -52,20 +58,13 @@
     margin: auto;
 }
 
-.container {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    padding: 30px;
-    max-width: 800px;
-    margin: auto;
-}
-
+/* Table styles */
 .table {
     margin-top: 30px;
     width: 100%;
 }
 
+/* Form title styles */
 .form-title {
     color: #2c3e50;
     font-weight: 600;
@@ -75,16 +74,19 @@
     border-bottom: 2px solid #eee;
 }
 
+/* Form group styles */
 .form-group {
     margin-bottom: 20px;
 }
 
+/* Form label styles */
 .form-label {
     font-weight: 500;
     color: #34495e;
     margin-bottom: 8px;
 }
 
+/* Form control styles */
 .form-control {
     border-radius: 8px;
     padding: 12px;
@@ -92,23 +94,28 @@
     transition: all 0.3s ease;
 }
 
+/* Form control focus styles */
 .form-control:focus {
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
     border-color: #4299e1;
 }
 
+/* Form check inline styles */
 .form-check-inline {
     margin-right: 15px;
 }
 
+/* Row styles */
 .row {
     margin: 0 -10px;
 }
 
+/* Column styles */
 .col-md-6 {
     padding: 0 10px;
 }
 
+/* Gender group styles */
 .gender-group {
     background: #f8fafc;
     padding: 15px;
@@ -116,7 +123,7 @@
     border: 1px solid #eee;
 }
 
-
+/* Button styles */
 .button-86 {
     all: unset;
     padding: 10px 20px;
@@ -140,6 +147,7 @@
     max-width: 300px;
 }
 
+/* Button pseudo-element styles */
 .button-86::after,
 .button-86::before {
     content: '';
@@ -150,6 +158,7 @@
     transition: all .4s;
 }
 
+/* Button before pseudo-element styles */
 .button-86::before {
     transform: translate(0%, 0%);
     width: 100%;
@@ -158,6 +167,7 @@
     border-radius: 8px;
 }
 
+/* Button after pseudo-element styles */
 .button-86::after {
     transform: translate(10px, 10px);
     width: 35px;
@@ -168,12 +178,14 @@
     border-radius: 50px;
 }
 
+/* Button hover before pseudo-element styles */
 .button-86:hover::before {
     transform: translate(5%, 20%);
     width: 110%;
     height: 110%;
 }
 
+/* Button hover after pseudo-element styles */
 .button-86:hover::after {
     border-radius: 10px;
     transform: translate(0, 0);
@@ -181,12 +193,13 @@
     height: 100%;
 }
 
+/* Button active after pseudo-element styles */
 .button-86:active::after {
     transition: 0s;
     transform: translate(0, 5%);
 }
 
-
+/* Registration button styles */
 .button-86.registration {
     color: #f0f0f0;
 }
@@ -195,7 +208,7 @@
     background: #0d6efd;
 }
 
-
+/* Add new button styles */
 .button-86.add-new {
     color: #f0f0f0;
 }
@@ -204,7 +217,7 @@
     background: #28a745;
 }
 
-
+/* Media queries for responsive design */
 @media (max-width: 768px) {
     .common-container-styles,
     .container,
@@ -229,13 +242,14 @@
     }
 }
 
-
+/* Search container styles */
 .search-container {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
+/* Input box styles */
 .input-box {
     position: relative;
     height: 76px;
@@ -246,6 +260,7 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Input box icon and button styles */
 .input-box i,
 .input-box .button {
     position: absolute;
@@ -253,12 +268,14 @@
     transform: translateY(-50%);
 }
 
+/* Input box icon styles */
 .input-box i {
     left: 20px;
     font-size: 30px;
     color: #707070;
 }
 
+/* Input box input styles */
 .input-box input {
     height: 100%;
     width: 100%;
@@ -270,6 +287,7 @@
     background-color: transparent;
 }
 
+/* Input box button styles */
 .input-box .button {
     right: 20px;
     font-size: 16px;
@@ -282,11 +300,12 @@
     cursor: pointer;
 }
 
+/* Input box button active styles */
 .input-box .button:active {
     transform: translateY(-50%) scale(0.98);
 }
 
-
+/* Media query for smaller screens */
 @media screen and (max-width: 500px) {
     .input-box {
         height: 66px;
@@ -305,7 +324,7 @@
     }
 }
 
-
+/* Sort container styles */
 .sort-container {
     display: flex;
     justify-content: flex-end;
@@ -313,16 +332,19 @@
     margin-bottom: 20px;
 }
 
+/* Sort container label styles */
 .sort-container label {
     margin-right: 10px;
     font-weight: bold;
 }
 
+/* Sort container select styles */
 .sort-container .form-select {
     width: auto;
     margin-right: 10px;
 }
 
+/* Sort container button styles */
 .sort-container .button {
     padding: 8px 15px;
     font-size: 14px;
