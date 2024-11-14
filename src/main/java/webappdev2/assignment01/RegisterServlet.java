@@ -21,6 +21,7 @@ import org.w3c.dom.Element;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // Retrieve form data
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -34,9 +35,41 @@ public class RegisterServlet extends HttpServlet {
         String region = request.getParameter("region");
         String gender = request.getParameter("gender");
 
-        // Validate input (e.g., email format, required fields)
-        if (firstName == null || lastName == null || employeeId == null || department == null || email == null || phone == null || address == null || city == null || region == null || gender == null) {
-            response.sendRedirect("register.jsp?error=missingFields");
+        // Check for Empty Strings and Trim Whitespace
+        if (firstName.trim().isEmpty() || lastName.trim().isEmpty() || employeeId.trim().isEmpty()
+                || department.trim().isEmpty() || email.trim().isEmpty() || phone.trim().isEmpty()
+                || address.trim().isEmpty() || city.trim().isEmpty() || region.trim().isEmpty()
+                || gender.trim().isEmpty()) {
+            request.setAttribute("error", "All fields are required.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        // Validate Name Format (assuming firstName and lastName are names)
+        String namePattern = "^[A-Za-z.\\s]+$";
+        if (!firstName.matches(namePattern)) {
+            request.setAttribute("error", "Invalid first name format.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        if (!lastName.matches(namePattern)) {
+            request.setAttribute("error", "Invalid last name format.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        // Validate Email Format
+        String emailPattern = "\\S+@\\S+\\.\\S+";
+        if (!email.matches(emailPattern)) {
+            request.setAttribute("error", "Invalid email format.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        // Validate Phone Number Format
+        String phonePattern = "^\\+?\\(?(\\d{1,3})?\\)?[-.\\s]?\\(?(\\d{1,4})?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}$";
+        if (!phone.matches(phonePattern)) {
+            response.sendRedirect("register.jsp?error=invalidPhone");
             return;
         }
 
