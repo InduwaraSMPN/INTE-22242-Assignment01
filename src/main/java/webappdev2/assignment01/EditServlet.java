@@ -51,18 +51,59 @@ public class EditServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
+
         String id = request.getParameter("id");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String employeeId = request.getParameter("employeeId");
-        String department = request.getParameter("department");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String address2 = request.getParameter("address2");
-        String city = request.getParameter("city");
-        String region = request.getParameter("region");
-        String gender = request.getParameter("gender");
+        String firstName = request.getParameter("firstName").trim();
+        String lastName = request.getParameter("lastName").trim();
+        String employeeId = request.getParameter("employeeId").trim();
+        String department = request.getParameter("department").trim();
+        String email = request.getParameter("email").trim();
+        String phone = request.getParameter("phone").trim();
+        String address = request.getParameter("address").trim();
+        String address2 = request.getParameter("address2") != null ? request.getParameter("address2").trim() : "";
+        String city = request.getParameter("city").trim();
+        String region = request.getParameter("region").trim();
+        String gender = request.getParameter("gender").trim();
+
+        // Check for Empty Strings
+        if (firstName.isEmpty() || lastName.isEmpty() || employeeId.isEmpty()
+                || department.isEmpty() || email.isEmpty() || phone.isEmpty()
+                || address.isEmpty() || city.isEmpty() || region.isEmpty()
+                || gender.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": 400, \"message\": \"All fields are required.\"}");
+            return;
+        }
+
+        // Validate Name Format (allowing more characters)
+        String namePattern = "^[A-Za-zÀ-ÖØ-öø-ÿ'\\-\\s]+$";
+        if (!firstName.matches(namePattern)) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": 400, \"message\": \"Invalid first name format.\"}");
+            return;
+        }
+        if (!lastName.matches(namePattern)) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": 400, \"message\": \"Invalid last name format.\"}");
+            return;
+        }
+
+        // Validate Email Format (more robust regex)
+        String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        if (!email.matches(emailPattern)) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": 400, \"message\": \"Invalid email format.\"}");
+            return;
+        }
+
+        // Validate Phone Number Format (simplified regex)
+        String phonePattern = "^\\+?[0-9]{1,3}[-.\s]?(\\([0-9]{1,4}\\)|[0-9]{1,4})[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}$";
+        if (!phone.matches(phonePattern)) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": 400, \"message\": \"Invalid phone number format.\"}");
+            return;
+        }
 
         synchronized (this) {
             try {
@@ -98,15 +139,17 @@ public class EditServlet extends HttpServlet {
                             StreamResult result = new StreamResult(inputFile);
                             transformer.transform(source, result);
 
-                            response.sendRedirect("employees.jsp");
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.getWriter().write("{\"status\": 200, \"message\": \"Employee updated successfully.\"}");
                             return;
                         }
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("{\"status\": 500, \"message\": \"Server error occurred. Please try again later.\"}");
             }
-            response.sendRedirect("employees.jsp");
         }
     }
 }
