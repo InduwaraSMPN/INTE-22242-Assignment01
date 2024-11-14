@@ -35,7 +35,8 @@
 }
 
 .employees_container {
-    max-width: 75%;
+    max-width: 90%;
+    overflow-x: auto; /* Make table scrollable on small screens */
 }
 
 .container {
@@ -58,13 +59,6 @@
 .table {
     margin-top: 30px;
     width: 100%;
-    overflow-x: auto; /* Make table scrollable on small screens */
-    table-layout: fixed; /* Ensure columns have fixed width */
-}
-
-.table th,
-.table td {
-    word-wrap: break-word; /* Break long words to fit within columns */
 }
 
 .form-title {
