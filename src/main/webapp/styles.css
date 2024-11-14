@@ -36,7 +36,12 @@
 
 .employees_container {
     max-width: 90%;
-    overflow-x: auto; /* Make table scrollable on small screens */
+    overflow-x: auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin: auto;
 }
 
 .container {
@@ -45,14 +50,6 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
     padding: 30px;
     max-width: 800px;
-    margin: auto;
-}
-
-.employees_container {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    padding: 30px;
     margin: auto;
 }
 
