@@ -28,7 +28,7 @@
     <div class="input-box">
       <i class="uil uil-search"></i>
       <input type="text" id="searchInput" placeholder="Search here..." />
-      <button class="button button-86 registration" id="searchButton">Search</button>
+      <button class="button-86 registration button " id="searchButton" >Search</button>
     </div>
   </div>
 
@@ -46,7 +46,7 @@
       <option value="region">Region</option>
       <option value="gender">Gender</option>
     </select>
-    <button class="btn btn-secondary button-86" id="sortButton">Sort</button>
+    <button class="button-86" id="sortButton">Sort</button>
   </div>
 
   <!-- Employees Table -->

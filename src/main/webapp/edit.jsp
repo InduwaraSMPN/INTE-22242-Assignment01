@@ -168,7 +168,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update Employee</button>
+    <button type="submit" class="button-86 registration">Update Employee</button>
   </form>
 </div>
 
