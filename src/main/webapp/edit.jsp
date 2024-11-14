@@ -46,7 +46,8 @@
           Employee updated successfully.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="viewEmployeesBtn">View Employees</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -162,7 +163,7 @@
       </div>
     </div>
 
-    <button type="submit" class="button-86 registration"">Update Employee</button>
+    <button type="submit" class="btn btn-primary">Update Employee</button>
   </form>
 </div>
 
@@ -197,6 +198,10 @@
           }
         }
       });
+    });
+
+    $('#viewEmployeesBtn').click(function() {
+      window.open('employees.jsp', '_blank');
     });
   });
 </script>

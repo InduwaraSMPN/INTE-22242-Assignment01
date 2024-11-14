@@ -42,7 +42,8 @@
           Employee registered successfully.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="viewEmployeesBtn">View Employees</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -176,6 +177,10 @@
           $('#errorModal').modal('show');
         }
       });
+    });
+
+    $('#viewEmployeesBtn').click(function() {
+      window.open('employees.jsp', '_blank');
     });
   });
 </script>
