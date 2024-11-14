@@ -26,6 +26,23 @@
     </div>
   </div>
 
+  <!-- Sorting Options -->
+  <div class="sort-container">
+    <label for="sortSelect">Sort by:</label>
+    <select id="sortSelect" class="form-select">
+      <option value="firstName">First Name</option>
+      <option value="lastName">Last Name</option>
+      <option value="employeeId">Employee ID</option>
+      <option value="department">Department</option>
+      <option value="email">Email</option>
+      <option value="phone">Phone</option>
+      <option value="city">City</option>
+      <option value="region">Region</option>
+      <option value="gender">Gender</option>
+    </select>
+    <button class="btn btn-secondary" id="sortButton">Sort</button>
+  </div>
+
   <table class="table table-bordered" id="employeesTable">
     <thead>
     <tr>
@@ -94,6 +111,11 @@
       filterTable(searchQuery);
     });
 
+    $('#sortButton').on('click', function() {
+      var sortBy = $('#sortSelect').val();
+      sortTable(sortBy);
+    });
+
     function filterTable(query) {
       $('#employeesTable tbody tr').each(function() {
         var row = $(this);
@@ -104,6 +126,36 @@
           row.show();
         }
       });
+    }
+
+    function sortTable(sortBy) {
+      var rows = $('#employeesTable tbody tr').get();
+      rows.sort(function(a, b) {
+        var A = $(a).children('td').eq(getIndex(sortBy)).text().toUpperCase();
+        var B = $(b).children('td').eq(getIndex(sortBy)).text().toUpperCase();
+
+        if (A < B) {
+          return -1;
+        }
+        if (A > B) {
+          return 1;
+        }
+        return 0;
+      });
+
+      $.each(rows, function(index, row) {
+        $('#employeesTable').children('tbody').append(row);
+      });
+    }
+
+    function getIndex(sortBy) {
+      var headers = $('#employeesTable th');
+      for (var i = 0; i < headers.length; i++) {
+        if ($(headers[i]).text().toLowerCase() === sortBy) {
+          return i;
+        }
+      }
+      return 0;
     }
   });
 </script>
