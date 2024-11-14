@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Induwara
-  Date: 11/14/2024
-  Time: 2:13 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,11 +6,49 @@
   <title>Employee Registration</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </head>
 <body class="common-body-styles">
 <div class="common-container-styles container">
   <h1 class="form-title">Employee Registration</h1>
-  <form action="RegisterServlet" method="post">
+
+  <!-- Modal for displaying error messages -->
+  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="errorMessage">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for displaying success messages -->
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Success</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="successMessage">
+          Employee registered successfully.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form action="RegisterServlet" method="post" id="registrationForm">
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
@@ -117,5 +148,36 @@
     <button type="submit" class="button-86 registration">Register Employee</button>
   </form>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#registrationForm').submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: 'RegisterServlet',
+        data: $(this).serialize(),
+        success: function(response) {
+          if (response.status === 200) {
+            // Clear the form
+            $('#registrationForm')[0].reset();
+            // Display success message
+            $('#successMessage').text(response.message);
+            $('#successModal').modal('show');
+          } else {
+            // Display the error message in the modal
+            $('#errorMessage').text(response.message);
+            $('#errorModal').modal('show');
+          }
+        },
+        error: function(xhr, status, error) {
+          // Handle network errors or other issues
+          $('#errorMessage').text(xhr.responseJSON.message || "An error occurred.");
+          $('#errorModal').modal('show');
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
