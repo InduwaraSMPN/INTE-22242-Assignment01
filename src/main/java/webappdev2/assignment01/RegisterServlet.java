@@ -110,8 +110,7 @@ public class RegisterServlet extends HttpServlet {
                 StreamResult result = new StreamResult(inputFile);
                 transformer.transform(source, result);
 
-                // Redirect to the employees page
-                response.sendRedirect("employees.jsp");
+                response.sendRedirect("register.jsp");
             } catch (Exception e) {
                 e.printStackTrace();
                 response.sendRedirect("register.jsp?error=serverError");
