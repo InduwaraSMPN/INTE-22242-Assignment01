@@ -10,20 +10,21 @@
   <link href="styles.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+  <!-- Unicons CSS -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 <body class="employees-body">
 <div class="common-container-styles employees_container">
   <h1 class="form-title">Employees</h1>
 
-  <!-- Search Form -->
-  <form class="form-inline mb-3" id="searchForm">
-    <div class="input-group">
-      <input type="text" class="form-control" id="searchInput" placeholder="Search by name, department, etc.">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit">Search</button>
-      </div>
+  <!-- Styled Search Bar -->
+  <div class="search-container">
+    <div class="input-box">
+      <i class="uil uil-search"></i>
+      <input type="text" id="searchInput" placeholder="Search here..." />
+      <button class="button" id="searchButton">Search</button>
     </div>
-  </form>
+  </div>
 
   <table class="table table-bordered" id="employeesTable">
     <thead>
@@ -88,8 +89,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#searchForm').on('submit', function(event) {
-      event.preventDefault();
+    $('#searchButton').on('click', function() {
       var searchQuery = $('#searchInput').val().toLowerCase();
       filterTable(searchQuery);
     });
