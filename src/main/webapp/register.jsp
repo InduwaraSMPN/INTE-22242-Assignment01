@@ -13,7 +13,7 @@
 <div class="common-container-styles container">
   <h1 class="form-title">Employee Registration</h1>
 
-  <!-- Modal for displaying error messages -->
+  
   <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <!-- Modal for displaying success messages -->
+  
   <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

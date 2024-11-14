@@ -24,7 +24,7 @@ public class EditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         try {
-            // Get the path to the resources directory
+            
             String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
             File inputFile = new File(resourcesPath);
 
@@ -66,7 +66,7 @@ public class EditServlet extends HttpServlet {
         String region = request.getParameter("region").trim();
         String gender = request.getParameter("gender").trim();
 
-        // Check for Empty Strings
+        
         if (firstName.isEmpty() || lastName.isEmpty() || employeeId.isEmpty()
                 || department.isEmpty() || email.isEmpty() || phone.isEmpty()
                 || address.isEmpty() || city.isEmpty() || region.isEmpty()
@@ -76,7 +76,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
-        // Validate Name Format (allowing more characters)
+        
         String namePattern = "^[A-Za-zÀ-ÖØ-öø-ÿ'\\-\\s]+$";
         if (!firstName.matches(namePattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -89,7 +89,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
-        // Validate Email Format (more robust regex)
+        
         String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         if (!email.matches(emailPattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -97,7 +97,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
-        // Validate Phone Number Format (simplified regex)
+        
         String phonePattern = "^\\+?[0-9]{1,3}[-.\s]?(\\([0-9]{1,4}\\)|[0-9]{1,4})[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}$";
         if (!phone.matches(phonePattern)) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -107,7 +107,7 @@ public class EditServlet extends HttpServlet {
 
         synchronized (this) {
             try {
-                // Get the path to the resources directory
+                
                 String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
                 File inputFile = new File(resourcesPath);
 

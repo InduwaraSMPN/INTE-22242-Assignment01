@@ -24,7 +24,7 @@ public class DeleteServlet extends HttpServlet {
         String id = request.getParameter("id");
         synchronized (this) {
             try {
-                // Get the path to the resources directory
+                
                 String resourcesPath = getServletContext().getRealPath("/WEB-INF/classes/employees.xml");
                 File inputFile = new File(resourcesPath);
 

@@ -10,14 +10,14 @@
   <link href="styles.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-  <!-- Unicons CSS -->
+  
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 <body class="employees-body">
 <div class="common-container-styles employees_container">
   <h1 class="form-title">Employees</h1>
 
-  <!-- Styled Search Bar -->
+  
   <div class="search-container">
     <div class="input-box">
       <i class="uil uil-search"></i>
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <!-- Sorting Options -->
+  
   <div class="sort-container">
     <label for="sortSelect">Sort by:</label>
     <select id="sortSelect" class="form-select">
