@@ -64,14 +64,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="firstName">First Name</label>
+          <label class="form-label" for="firstName">First Name*</label>
           <input type="text" class="form-control" id="firstName" name="firstName"
                  value="<%= employee.getElementsByTagName("firstName").item(0).getTextContent() %>" required>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="lastName">Last Name</label>
+          <label class="form-label" for="lastName">Last Name*</label>
           <input type="text" class="form-control" id="lastName" name="lastName"
                  value="<%= employee.getElementsByTagName("lastName").item(0).getTextContent() %>" required>
         </div>
@@ -81,14 +81,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="employeeId">Employee ID</label>
+          <label class="form-label" for="employeeId">Employee ID*</label>
           <input type="text" class="form-control" id="employeeId" name="employeeId"
                  value="<%= employee.getElementsByTagName("employeeId").item(0).getTextContent() %>" required>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="department">Department</label>
+          <label class="form-label" for="department">Department*</label>
           <select class="form-control" id="department" name="department" required>
             <option value="HR" <%= employee.getElementsByTagName("department").item(0).getTextContent().equals("HR") ? "selected" : "" %>>HR Department</option>
             <option value="Operations" <%= employee.getElementsByTagName("department").item(0).getTextContent().equals("Operations") ? "selected" : "" %>>Operations Management Department</option>
@@ -104,43 +104,45 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" for="email">Email*</label>
           <input type="email" class="form-control" id="email" name="email"
                  value="<%= employee.getElementsByTagName("email").item(0).getTextContent() %>" required>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="phone">Phone</label>
+          <label class="form-label" for="phone">Phone*</label>
           <input type="tel" class="form-control" id="phone" name="phone"
                  value="<%= employee.getElementsByTagName("phone").item(0).getTextContent() %>" required>
         </div>
       </div>
     </div>
 
+    <div>
+      <label class="form-label">Address</label>
+    </div>
     <div class="form-group">
-      <label class="form-label" for="address">Address</label>
       <input type="text" class="form-control" id="address" name="address"
              value="<%= employee.getElementsByTagName("address").item(0).getTextContent() %>" required>
+      <label for="address"><i>Address Line 1*</i></label>
     </div>
-
     <div class="form-group">
-      <label class="form-label" for="address2">Street Address Line 2</label>
       <input type="text" class="form-control" id="address2" name="address2"
              value="<%= employee.getElementsByTagName("address2").item(0).getTextContent() %>">
+      <label for="address2"><i>Address Line 2</i></label>
     </div>
 
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="city">City</label>
+          <label class="form-label" for="city">City*</label>
           <input type="text" class="form-control" id="city" name="city"
                  value="<%= employee.getElementsByTagName("city").item(0).getTextContent() %>" required>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="form-label" for="region">Region</label>
+          <label class="form-label" for="region">Region*</label>
           <input type="text" class="form-control" id="region" name="region"
                  value="<%= employee.getElementsByTagName("region").item(0).getTextContent() %>" required>
         </div>
@@ -148,7 +150,7 @@
     </div>
 
     <div class="form-group">
-      <label class="form-label">Gender</label>
+      <label class="form-label">Gender*</label>
       <div class="gender-group">
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="gender" id="male" value="Male"
@@ -167,7 +169,10 @@
         </div>
       </div>
     </div>
-
+    <div>
+      <label style="color: #cf403a;font-style: italic;padding-bottom: 15px;text-align: right;">Fields marked with * are required</label>
+      <label class="form-label"></label>
+    </div>
     <button type="submit" class="button-86 registration">Update Employee</button>
   </form>
 </div>

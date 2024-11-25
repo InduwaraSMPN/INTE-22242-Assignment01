@@ -36,15 +36,17 @@
   <div class="sort-container">
     <label for="sortSelect">Sort by:</label>
     <select id="sortSelect" class="form-select">
-      <option value="firstName">First Name</option>
-      <option value="lastName">Last Name</option>
-      <option value="employeeId">Employee ID</option>
-      <option value="department">Department</option>
-      <option value="email">Email</option>
-      <option value="phone">Phone</option>
-      <option value="city">City</option>
-      <option value="region">Region</option>
-      <option value="gender">Gender</option>
+      <option value="First Name">First Name</option>
+      <option value="Last Name">Last Name</option>
+      <option value="Employee ID">Employee ID</option>
+      <option value="Department">Department</option>
+      <option value="Email">Email</option>
+      <option value="Phone">Phone</option>
+      <option value="Address">Address</option>
+      <option value="Address Line 2">Address Line 2</option> <!-- New option -->
+      <option value="City">City</option>
+      <option value="Region">Region</option>
+      <option value="Gender">Gender</option>
     </select>
     <button class="button-86" id="sortButton">Sort</button>
   </div>
@@ -60,6 +62,7 @@
       <th>Email</th>
       <th>Phone</th>
       <th>Address</th>
+      <th>Address Line 2</th> <!-- New column -->
       <th>City</th>
       <th>Region</th>
       <th>Gender</th>
@@ -91,6 +94,7 @@
       <td><%= eElement.getElementsByTagName("email").item(0).getTextContent() %></td>
       <td><%= eElement.getElementsByTagName("phone").item(0).getTextContent() %></td>
       <td><%= eElement.getElementsByTagName("address").item(0).getTextContent() %></td>
+      <td><%= eElement.getElementsByTagName("address2").item(0).getTextContent() %></td> <!-- New column -->
       <td><%= eElement.getElementsByTagName("city").item(0).getTextContent() %></td>
       <td><%= eElement.getElementsByTagName("region").item(0).getTextContent() %></td>
       <td><%= eElement.getElementsByTagName("gender").item(0).getTextContent() %></td>
@@ -164,12 +168,8 @@
     // Function to get the index of the column based on its header text
     function getIndex(sortBy) {
       var headers = $('#employeesTable th');
-      for (var i = 0; i < headers.length; i++) {
-        if ($(headers[i]).text().toLowerCase() === sortBy) {
-          return i;
-        }
-      }
-      return 0;
+      var headerTexts = ['First Name', 'Last Name', 'Employee ID', 'Department', 'Email', 'Phone', 'Address', 'Address Line 2', 'City', 'Region', 'Gender'];
+      return headerTexts.indexOf(sortBy);
     }
   });
 </script>
