@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="javax.xml.parsers.DocumentBuilderFactory, javax.xml.parsers.DocumentBuilder, org.w3c.dom.Document, org.w3c.dom.NodeList, org.w3c.dom.Node, org.w3c.dom.Element, java.io.File" %>
+<%@ page import="webappdev2.assignment01.Employee" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,23 +86,37 @@
           Node nNode = nList.item(temp);
           if (nNode.getNodeType() == Node.ELEMENT_NODE) {
             Element eElement = (Element) nNode;
+            Employee employee = new Employee(
+                    eElement.getAttribute("id"),
+                    eElement.getElementsByTagName("firstName").item(0).getTextContent(),
+                    eElement.getElementsByTagName("lastName").item(0).getTextContent(),
+                    eElement.getElementsByTagName("employeeId").item(0).getTextContent(),
+                    eElement.getElementsByTagName("department").item(0).getTextContent(),
+                    eElement.getElementsByTagName("email").item(0).getTextContent(),
+                    eElement.getElementsByTagName("phone").item(0).getTextContent(),
+                    eElement.getElementsByTagName("address").item(0).getTextContent(),
+                    eElement.getElementsByTagName("address2").item(0).getTextContent(),
+                    eElement.getElementsByTagName("city").item(0).getTextContent(),
+                    eElement.getElementsByTagName("region").item(0).getTextContent(),
+                    eElement.getElementsByTagName("gender").item(0).getTextContent()
+            );
     %>
     <tr>
-      <td><%= eElement.getElementsByTagName("firstName").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("lastName").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("employeeId").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("department").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("email").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("phone").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("address").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("address2").item(0).getTextContent() %></td> <!-- New column -->
-      <td><%= eElement.getElementsByTagName("city").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("region").item(0).getTextContent() %></td>
-      <td><%= eElement.getElementsByTagName("gender").item(0).getTextContent() %></td>
+      <td><%= employee.getFirstName() %></td>
+      <td><%= employee.getLastName() %></td>
+      <td><%= employee.getEmployeeId() %></td>
+      <td><%= employee.getDepartment() %></td>
+      <td><%= employee.getEmail() %></td>
+      <td><%= employee.getPhone() %></td>
+      <td><%= employee.getAddress() %></td>
+      <td><%= employee.getAddress2() %></td> <!-- New column -->
+      <td><%= employee.getCity() %></td>
+      <td><%= employee.getRegion() %></td>
+      <td><%= employee.getGender() %></td>
       <td>
         <!-- Edit and Delete buttons -->
-        <a href="EditServlet?id=<%= eElement.getAttribute("id") %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-        <a href="DeleteServlet?id=<%= eElement.getAttribute("id") %>" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+        <a href="EditServlet?id=<%= employee.getId() %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="DeleteServlet?id=<%= employee.getId() %>" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
       </td>
     </tr>
     <%

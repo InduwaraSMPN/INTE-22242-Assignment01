@@ -38,7 +38,21 @@ public class EditServlet extends HttpServlet {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     if (eElement.getAttribute("id").equals(id)) {
-                        request.setAttribute("employee", eElement);
+                        Employee employee = new Employee(
+                                eElement.getAttribute("id"),
+                                eElement.getElementsByTagName("firstName").item(0).getTextContent(),
+                                eElement.getElementsByTagName("lastName").item(0).getTextContent(),
+                                eElement.getElementsByTagName("employeeId").item(0).getTextContent(),
+                                eElement.getElementsByTagName("department").item(0).getTextContent(),
+                                eElement.getElementsByTagName("email").item(0).getTextContent(),
+                                eElement.getElementsByTagName("phone").item(0).getTextContent(),
+                                eElement.getElementsByTagName("address").item(0).getTextContent(),
+                                eElement.getElementsByTagName("address2").item(0).getTextContent(),
+                                eElement.getElementsByTagName("city").item(0).getTextContent(),
+                                eElement.getElementsByTagName("region").item(0).getTextContent(),
+                                eElement.getElementsByTagName("gender").item(0).getTextContent()
+                        );
+                        request.setAttribute("employee", employee);
                         request.getRequestDispatcher("edit.jsp").forward(request, response);
                         return;
                     }
@@ -105,6 +119,22 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
+        // Create an Employee object
+        Employee employee = new Employee(
+                id,
+                firstName,
+                lastName,
+                employeeId,
+                department,
+                email,
+                phone,
+                address,
+                address2,
+                city,
+                region,
+                gender
+        );
+
         synchronized (this) {
             try {
                 // Get the path to the resources directory
@@ -122,17 +152,17 @@ public class EditServlet extends HttpServlet {
                         Element eElement = (Element) nNode;
                         if (eElement.getAttribute("id").equals(id)) {
                             // Update the employee details
-                            eElement.getElementsByTagName("firstName").item(0).setTextContent(firstName);
-                            eElement.getElementsByTagName("lastName").item(0).setTextContent(lastName);
-                            eElement.getElementsByTagName("employeeId").item(0).setTextContent(employeeId);
-                            eElement.getElementsByTagName("department").item(0).setTextContent(department);
-                            eElement.getElementsByTagName("email").item(0).setTextContent(email);
-                            eElement.getElementsByTagName("phone").item(0).setTextContent(phone);
-                            eElement.getElementsByTagName("address").item(0).setTextContent(address);
-                            eElement.getElementsByTagName("address2").item(0).setTextContent(address2);
-                            eElement.getElementsByTagName("city").item(0).setTextContent(city);
-                            eElement.getElementsByTagName("region").item(0).setTextContent(region);
-                            eElement.getElementsByTagName("gender").item(0).setTextContent(gender);
+                            eElement.getElementsByTagName("firstName").item(0).setTextContent(employee.getFirstName());
+                            eElement.getElementsByTagName("lastName").item(0).setTextContent(employee.getLastName());
+                            eElement.getElementsByTagName("employeeId").item(0).setTextContent(employee.getEmployeeId());
+                            eElement.getElementsByTagName("department").item(0).setTextContent(employee.getDepartment());
+                            eElement.getElementsByTagName("email").item(0).setTextContent(employee.getEmail());
+                            eElement.getElementsByTagName("phone").item(0).setTextContent(employee.getPhone());
+                            eElement.getElementsByTagName("address").item(0).setTextContent(employee.getAddress());
+                            eElement.getElementsByTagName("address2").item(0).setTextContent(employee.getAddress2());
+                            eElement.getElementsByTagName("city").item(0).setTextContent(employee.getCity());
+                            eElement.getElementsByTagName("region").item(0).setTextContent(employee.getRegion());
+                            eElement.getElementsByTagName("gender").item(0).setTextContent(employee.getGender());
 
                             // Write the updated document back to the file
                             TransformerFactory transformerFactory = TransformerFactory.newInstance();

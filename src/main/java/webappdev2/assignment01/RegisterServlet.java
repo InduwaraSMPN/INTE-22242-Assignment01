@@ -75,6 +75,22 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
+        // Create an Employee object
+        Employee employee = new Employee(
+                UUID.randomUUID().toString(),
+                firstName,
+                lastName,
+                employeeId,
+                department,
+                email,
+                phone,
+                address,
+                address2,
+                city,
+                region,
+                gender
+        );
+
         // Synchronized block to ensure thread safety
         synchronized (this) {
             try {
@@ -86,25 +102,9 @@ public class RegisterServlet extends HttpServlet {
                 DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
                 Document doc = docBuilder.parse(inputFile);
 
-                // Create a new employee element
-                Element employee = doc.createElement("employee");
-                employee.setAttribute("id", UUID.randomUUID().toString()); // Generate a unique ID
-
-                // Add child elements to the employee element
-                addChildElement(doc, employee, "firstName", firstName);
-                addChildElement(doc, employee, "lastName", lastName);
-                addChildElement(doc, employee, "employeeId", employeeId);
-                addChildElement(doc, employee, "department", department);
-                addChildElement(doc, employee, "email", email);
-                addChildElement(doc, employee, "phone", phone);
-                addChildElement(doc, employee, "address", address);
-                if (!address2.isEmpty()) addChildElement(doc, employee, "address2", address2);
-                addChildElement(doc, employee, "city", city);
-                addChildElement(doc, employee, "region", region);
-                addChildElement(doc, employee, "gender", gender);
-
-                // Append the new employee element to the document
-                doc.getDocumentElement().appendChild(employee);
+                // Convert Employee object to XML Element and append to the document
+                Element employeeElement = employee.toXMLElement(doc);
+                doc.getDocumentElement().appendChild(employeeElement);
 
                 // Write the updated document back to the file
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -121,12 +121,5 @@ public class RegisterServlet extends HttpServlet {
                 response.getWriter().write("{\"status\": 500, \"message\": \"Server error occurred. Please try again later.\"}");
             }
         }
-    }
-
-    // Helper method to add child elements to the parent element
-    private void addChildElement(Document doc, Element parent, String name, String value) {
-        Element elem = doc.createElement(name);
-        elem.setTextContent(value);
-        parent.appendChild(elem);
     }
 }
